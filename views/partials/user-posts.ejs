@@ -1,0 +1,28 @@
+<div class="row">
+    <% locals.userPosts.forEach( (post, index) => { %>
+        <div class="col-md-12 col-lg-6 mb-5">
+          <div class="card post rounded overflow-hidden shadow1">
+            <img src="<%= post.image %>" class="card-img" alt="...">
+            <div class="card-img-overlay">
+              <p class="card-tag mb-2" style="background-color:<%= post.tag.color %> " >
+                <%= post.tag.name %>
+              </p>
+              <h5 class="card-title text-white"> <%= post.title %> </h5>
+              <small class="card-text text-white opacity-75">by <%= post.author %> | <%= post.date %></small>
+              <p class="card-text text-white"><%= post.message %></p>
+              <a class="icon-link icon-link-hover" href="#">
+                  Continue Reading
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+              </a>
+              <form class="my-2" action="/deletePost" method="post">
+                <input type="hidden" name="itemId" value="<%= post.id %> "> <!-- The item's ID -->
+                <button type="submit" class="btn-primary bg-danger ">🗑️</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+    <% }) %>
+</div>

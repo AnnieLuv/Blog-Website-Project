@@ -1,0 +1,116 @@
+<%- include('./partials/header.ejs') %>
+<main class="container-fluid mt-5 px-0">
+  <!-- the featured blog post -->
+  <div class="row my-5 py-5">
+    <div class="col-0 col-md-1"></div>
+    <div class="col-12 col-md-10 px-0">
+      <div id="car" class="carousel-container rounded">
+
+          <% locals.featuredData.forEach( (data, index) => { %>
+            <!-- on only first index, assign the show class -->
+            <div class="carousel-card <% if(index === 0){ %> show-card <% } %> shadow">
+              <div class="card-content featured d-flex justify-content-center">
+                <div class="col-12 col-md-7 px-4 px-lg-5 d-flex flex-column align-items-start justify-content-center">
+                  <p class="card-tag mb-2" style="background-color: <%= data.tag.color%>;">
+                    <%= data.tag.name %>
+                  </p>
+                  <h1 class="display-4 fw-bold fst-italic mb-2">Featured</h1>
+                  <h2 class="my-0 fw-bold"><%= data.title %></h2>
+                  <small class="opacity-75">by <%= data.author %></small>
+                  <p class="my-3"><%= data.message %></p>
+                  <a href="#" class="text-light icon-link gap-1 icon-link-hover ">
+                    Continue reading
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-right"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+                <div class="col-md-5 overflow-hidden d-md-flex justify-content-center d-none">
+                  <img
+                    src="<%= data.image %>"
+                    class="img-fluid shadow"
+                    alt="featured image"
+                  />
+                </div>
+              </div>
+            </div>
+         <% } ) %>
+
+      </div>
+      <!-- end of carousel container -->
+    </div>
+    <!-- end of column -->
+    <div class="col-md-1"></div>
+  </div>
+
+
+  <!-- two posts i add for decor -->
+  <div class="row py-5 background2">
+    <div class="col-0 col-md-2"></div>
+    <div class="col-12 col-md-8">
+      <div id="grid">
+        <div class="row">
+          <% locals.posts.forEach( (post) => { %>
+            <div class="col-md-12 col-lg-6 mb-5">
+              <div class="card post rounded overflow-hidden shadow1">
+                <img src="<%= post.image %>" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <p class="card-tag mb-2" style="background-color: <%= post.tag.color%>;" >
+                    <%= post.tag.name %>
+                  </p>
+                  <h5 class="card-title text-white"> <%= post.title %> </h5>
+                  <small class="card-text text-white opacity-75">by <%= post.author %> | <%= post.date %></small>
+                  <p class="card-text text-white"><%= post.message %></p>
+                  <a class="icon-link icon-link-hover stretched-link" href="#">
+                      Continue Reading
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>       
+        <!-- dynamically allocated blog posts are stored here in 2 posts per row -->
+         <%- include('partials/user-posts.ejs') %>
+      </div>
+    </div>
+    <!-- trending posts column -->
+    <div class="col-0 col-md-2 px-0 d-none d-md-block background2">
+      <div id="trending" class="list-group w-75 gap-1 mx-auto">
+        <h3 class="fw-bold bg-transparent list-group-item border-0 text-black">Trending</h3>
+        <% locals.trending.forEach( (post) => { %>
+          <div class="flip-card">
+            <a
+            href="#"
+            class="list-group-item border-0 background3 shadow flip-card-inner"
+            aria-current="true"
+          >
+            <p class="card-tag mb-2" style="background-color: <%= post.tag.color %>;">
+              <%= post.tag.name %>
+            </p>
+            <div class="d-flex justify-content-between gap-2">
+              <h5 class="fw-medium mb-0"><%= post.title %></h5>
+              <small class="opacity-75 mb-0"><%= post.timeago %></small>
+            </div>
+            <small class="opacity-75 mt-1">by <%= post.author %></small>
+            <p><%= post.message %> </p>
+          </a>
+          </div>    
+        <% }) %>    
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('./partials/footer.ejs') %>
